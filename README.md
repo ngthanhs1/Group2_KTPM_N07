@@ -25,10 +25,10 @@ diện và trải nghiệm người dùng.
 Học từ vựng là nền tảng trong quá trình học ngoại ngữ. Việc nắm vững vốn từ giúp người
 học có thể đọc hiểu văn bản, giao tiếp trôi chảy và phát triển các kỹ năng ngôn ngữ khác như
 viết, nghe và nói. Tuy nhiên, phần lớn người học gặp phải những khó khăn phổ biến như:
-• Khó ghi nhớ từ mới trong thời gian dài.
-• Thiếu phương pháp học hiệu quả.
-• Không có công cụ theo dõi tiến độ và hỗ trợ học tập phù hợp.
-• Các ứng dụng học từ hiện tại có thể hơi phức tạp với người mới bắt đầu.
+- **Khó ghi nhớ từ mới trong thời gian dài**.
+- **Thiếu phương pháp học hiệu quả**.
+- **Không có công cụ theo dõi tiến độ và hỗ trợ học tập phù hợp**.
+- **Các ứng dụng học từ hiện tại có thể hơi phức tạp với người mới bắt đầu**.
 Từ đó, nhóm chúng em đề xuất xây dựng một phần mềm học từ vựng đơn giản, hiệu quả và
 tiện lợi trên nền tảng web. Sản phẩm này hướng đến người dùng phổ thông, đặc biệt là học
 sinh, sinh viên và những người đang tự học ngoại ngữ. Dự án tập trung vào việc cung cấp
