@@ -29,16 +29,16 @@ viết, nghe và nói. Tuy nhiên, phần lớn người học gặp phải nh�
 - **Thiếu phương pháp học hiệu quả**.
 - **Không có công cụ theo dõi tiến độ và hỗ trợ học tập phù hợp**.
 - **Các ứng dụng học từ hiện tại có thể hơi phức tạp với người mới bắt đầu**.
-Từ đó, nhóm chúng em đề xuất xây dựng một phần mềm học từ vựng đơn giản, hiệu quả và
+### Từ đó, nhóm chúng em đề xuất xây dựng một phần mềm học từ vựng đơn giản, hiệu quả và
 tiện lợi trên nền tảng web. Sản phẩm này hướng đến người dùng phổ thông, đặc biệt là học
 sinh, sinh viên và những người đang tự học ngoại ngữ. Dự án tập trung vào việc cung cấp
 phương pháp học từ vựng hiệu quả thông qua lặp lại có chủ đích, hình ảnh hóa và kiểm tra
 tương tác.
 2. Sản phẩm là gì?
 Phần mềm là một phần mềm web học từ vựng với các chức năng cơ bản như:
-• Học từ mới qua thẻ flashcard.
-• Làm bài kiểm tra trắc nghiệm ngắn để ghi nhớ từ.
-• Chế độ ôn tập các từ khó ghi nhớ.
+- Học từ mới qua thẻ flashcard.
+- Làm bài kiểm tra trắc nghiệm ngắn để ghi nhớ từ.
+- Chế độ ôn tập các từ khó ghi nhớ.
 Giao diện đơn giản, tối ưu cho trình duyệt, phù hợp học trên các thiết bị.
 3. Đối tượng sử dụng
 • Học sinh, sinh viên đang học tiếng Anh hoặc ngoại ngữ khác.
