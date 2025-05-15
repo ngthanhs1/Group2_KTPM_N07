@@ -21,7 +21,7 @@ Mục tiêu của dự án không chỉ là xây dựng một phần mềm học
 để nhóm áp dụng kiến thức đã học về phát triển phần mềm, quản lý dự án, thiết kế giao
 diện và trải nghiệm người dùng.
 ## Tầm nhìn (Vision)
-**1**. Giới thiệu
+1. Giới thiệu
 Học từ vựng là nền tảng trong quá trình học ngoại ngữ. Việc nắm vững vốn từ giúp người
 học có thể đọc hiểu văn bản, giao tiếp trôi chảy và phát triển các kỹ năng ngôn ngữ khác như
 viết, nghe và nói. Tuy nhiên, phần lớn người học gặp phải những khó khăn phổ biến như:
@@ -34,13 +34,13 @@ tiện lợi trên nền tảng web. Sản phẩm này hướng đến người 
 sinh, sinh viên và những người đang tự học ngoại ngữ. Dự án tập trung vào việc cung cấp
 phương pháp học từ vựng hiệu quả thông qua lặp lại có chủ đích, hình ảnh hóa và kiểm tra
 tương tác.
-**2**. Sản phẩm là gì?
+2. Sản phẩm là gì?
 Phần mềm là một phần mềm web học từ vựng với các chức năng cơ bản như:
 • Học từ mới qua thẻ flashcard.
 • Làm bài kiểm tra trắc nghiệm ngắn để ghi nhớ từ.
 • Chế độ ôn tập các từ khó ghi nhớ.
 Giao diện đơn giản, tối ưu cho trình duyệt, phù hợp học trên các thiết bị.
-**3**. Đối tượng sử dụng
+3. Đối tượng sử dụng
 • Học sinh, sinh viên đang học tiếng Anh hoặc ngoại ngữ khác.
 • Người đi làm muốn ôn luyện từ chuyên ngành hoặc giao tiếp cơ bản.
 • Giáo viên, phụ huynh muốn hỗ trợ học sinh học từ tại nhà.
