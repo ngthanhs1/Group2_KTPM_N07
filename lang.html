@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thẻ Ghi Từ Vựng</title>
+    <link rel="stylesheet" href="lang.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="card-container" id="card-container"></div>
+
+    <div class="arrow-container">
+        <button class="arrow left" id="prev">←</button>
+        <button id="check-btn">Check</button>
+        <button class="arrow right" id="next">→</button>
+    </div>
+
+    <div class="add-word-container">
+        <button id="sound-btn">Sound</button>
+        <input type='text' id='check-word-input' autocomplete="off" placeholder='Nhập từ vựng'>
+        <input type="text" id="new-word" placeholder="Nhập từ mới" />
+        <input type="text" id="new-definition" placeholder="Nhập nghĩa của từ" />
+        <!-- <input type="text" id="search-input" placeholder="Nhập từ cần tìm" /> -->
+        <button id="add-word-btn">Thêm từ</button>
+        <button id="delete-word-btn">Xóa từ</button>
+        <!-- <button id="search-btn">Search</button> -->
+    </div>
+
+    <div class="extra-container">
+        <!-- <button id="shuffle-btn">Shuffle</button> -->
+        <div id="card-count">Số lượng thẻ: 6</div>
+    </div>
+
+    <script src="lang.js"></script>
+</body>
+</html>

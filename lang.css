@@ -1,0 +1,180 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    flex-direction: column;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;  /* Cho phép các thẻ xếp theo chiều dọc nếu có nhiều thẻ */
+}
+
+.card {
+    width: 450px;
+    height: 300px;
+    perspective: 1000px; /* Tạo hiệu ứng 3D */
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    transform-origin: center;
+    transform: rotateX(0deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Ẩn mặt sau khi lật */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.card-front {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}
+
+.card-back {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    transform: rotateX(180deg); /* Đảo mặt sau */
+}
+
+.word {
+    font-size: 35px;
+    padding-top: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.definition {
+    font-style: italic;
+    color: #555;
+}
+
+/* Các nút điều hướng (mũi tên) */
+.arrow-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.arrow {
+    font-size: 24px;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+/* Thêm từ vựng */
+.add-word-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.add-word-container input {
+    padding: 10px;
+    margin: 5px;
+    width: 200px;
+    font-size: 16px;
+}
+
+.add-word-container button {
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Nút phát âm */
+.speak-button {
+    margin-left: 350px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Nút trộn và hiển thị số lượng thẻ */
+.extra-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 200px;
+}
+
+#shuffle-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#card-count {
+    margin-left: 20px;
+    font-size: 16px;
+    color: #555;
+}
+.front{
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 90%;
+}
+
+.hr hr {
+    width: 100%; /* Ban đầu hiển thị full width */
+    height: 4px;
+    background-color: none; /* Màu vàng ban đầu */
+    border: none;
+    transition: width 0.5s ease-in-out; /* Chỉ transition width */
+    transform-origin: left center; /* Điểm gốc từ trái */
+    display: block; /* Đảm bảo hoạt động như block */
+    float: left; /* Ép bắt đầu từ trái */
+}
+
+.wrong-word {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.correct-char {
+    display: inline-block;
+}
+
+.wrong-char {
+    display: inline-block;
+}
+
+.added-char {
+    display: inline-block;
+}
