@@ -157,7 +157,7 @@ body {
     transition: width 0.5s ease-in-out; /* Chỉ transition width */
     transform-origin: left center; /* Điểm gốc từ trái */
     display: block; /* Đảm bảo hoạt động như block */
-    float: left; /* Ép bắt đầu từ trái */
+    float: left; 
 }
 
 .wrong-word {
