@@ -1,78 +1,110 @@
-# PHẦN MỀM HỌC TỪ VỰNG
-Dưới đây là phần mềm học từ vựng trên web cho phép người dùng học và nghe các từ vựng.
-## Các thành viên phát triển phần mềm
-- **Nguyễn Văn Thành**-23010191
-- **Đỗ Thành Long**-23010174
-- **Lê Quang Huy**-23010150
-- **Nguyễn Trọng Huy**-23010159
-## Giới thiệu tổng quan
-Trong thời đại toàn cầu hóa và công nghệ phát triển mạnh mẽ, việc học ngoại ngữ – đặc biệt
-là tiếng Anh – trở thành một kỹ năng không thể thiếu. Một trong những yếu tố cốt lõi quyết
-định khả năng sử dụng ngoại ngữ hiệu quả chính là vốn từ vựng. Tuy nhiên, việc ghi nhớ từ
-mới không phải lúc nào cũng dễ dàng, đặc biệt khi thiếu phương pháp học phù hợp và công
-cụ hỗ trợ hiệu quả.
-Xuất phát từ thực tế đó, nhóm chúng em xây dựng phần mềm học từ vựng trên nền tảng
-web – một ứng dụng học từ đơn giản, dễ sử dụng, giúp người học ghi nhớ từ vựng hiệu quả
-hơn thông qua phương pháp như flashcard(lật thẻ), nghe, ghi lại từ vựng nghe được...Sản
-phẩm hướng đến nhiều đối tượng khác nhau: học sinh, sinh viên, người đi làm, hoặc bất kỳ
-ai đang học ngoại ngữ. Với giao diện thân thiện, dễ sử dụng và không cần cài đặt phần mềm,
-người học có thể truy cập thông qua trình duyệt web.
-Mục tiêu của dự án không chỉ là xây dựng một phần mềm học tập hiệu quả, mà còn là cơ hội
-để nhóm áp dụng kiến thức đã học về phát triển phần mềm, quản lý dự án, thiết kế giao
-diện và trải nghiệm người dùng.
-## Tầm nhìn (Vision)
-1. Giới thiệu
-Học từ vựng là nền tảng trong quá trình học ngoại ngữ. Việc nắm vững vốn từ giúp người
-học có thể đọc hiểu văn bản, giao tiếp trôi chảy và phát triển các kỹ năng ngôn ngữ khác như
-viết, nghe và nói. Tuy nhiên, phần lớn người học gặp phải những khó khăn phổ biến như:
-- **Khó ghi nhớ từ mới trong thời gian dài**.
-- **Thiếu phương pháp học hiệu quả**.
-- **Không có công cụ theo dõi tiến độ và hỗ trợ học tập phù hợp**.
-- **Các ứng dụng học từ hiện tại có thể hơi phức tạp với người mới bắt đầu**.
-### Từ đó, nhóm chúng em đề xuất xây dựng một phần mềm học từ vựng đơn giản, hiệu quả và
-tiện lợi trên nền tảng web. Sản phẩm này hướng đến người dùng phổ thông, đặc biệt là học
-sinh, sinh viên và những người đang tự học ngoại ngữ. Dự án tập trung vào việc cung cấp
-phương pháp học từ vựng hiệu quả thông qua lặp lại có chủ đích, hình ảnh hóa và kiểm tra
-tương tác.
-2. Sản phẩm là gì?
-Phần mềm là một phần mềm web học từ vựng với các chức năng cơ bản như:
-- Học từ mới qua thẻ flashcard.
-- Làm bài kiểm tra trắc nghiệm ngắn để ghi nhớ từ.
-- Chế độ ôn tập các từ khó ghi nhớ.
-Giao diện đơn giản, tối ưu cho trình duyệt, phù hợp học trên các thiết bị.
-3. Đối tượng sử dụng
-• Học sinh, sinh viên đang học tiếng Anh hoặc ngoại ngữ khác.
-• Người đi làm muốn ôn luyện từ chuyên ngành hoặc giao tiếp cơ bản.
-• Giáo viên, phụ huynh muốn hỗ trợ học sinh học từ tại nhà.
-• Người mới bắt đầu học ngoại ngữ, chưa quen với các ứng dụng phức tạp.
-4. Vấn đề được giải quyết
-Phần mềm học từ vựng giải quyết các vấn đề cụ thể sau:
-• Cung cấp phương pháp học từ hiệu quả thông qua việc lặp lại có kiểm soát và học
-kèm hình ảnh/ví dụ.
-• Tăng tính tương tác, giảm sự nhàm chán khi học từ bằng cách thiết kế giao diện đơn
-giản, sinh động.
-5. Vì sao sản phẩm đáng để xây dựng?
-• Nhu cầu học ngoại ngữ – đặc biệt là từ vựng – là cực kỳ phổ biến trong xã hội hiện
-đại.
-• Sản phẩm phù hợp cho nhiều cấp độ và có thể triển khai trong giáo dục phổ thông
-hoặc tự học cá nhân.
-• Dễ triển khai, mở rộng, phù hợp làm bài tập đồ án kỹ thuật phần mềm hoặc phát
-triển thành sản phẩm thực tế.
-• Có thể phát triển thêm: tích hợp AI, hệ thống tài khoản, giao diện di động, và nhiều
-tiện ích hỗ trợ người học.
-## Hướng tiếp cận
-1. Tính khả thi của dự ánDự án này có tính khả thi cao, phù hợp với một nhóm sinh viên CNTT hoặc phát triển cá
-nhân. Phần mềm không yêu cầu công nghệ phức tạp ở giai đoạn đầu, chủ yếu tập trung vào
-giao diện người dùng, logic học từ và quản lý dữ liệu đơn giản. Với các công cụ như HTML,
-CSS và JavaScript, việc xây dựng một phiên bản khả dụng tối thiểu (MVP) có thể hoàn thành
-trong thời gian ngắn.
-2. MVP
-Trong giai đoạn đầu, nhóm tập trung phát triển các chức năng cốt lõi nhất của phần mềm,
-bao gồm:
-• Học từ vựng bằng flashcard: người học có thể lật thẻ để xem nghĩa, phiên âm.
-• Có thể thêm mới các từ để học.
-• Thống kê tiến độ học: số từ đã học, số câu đúng/sai.
-Với MVP này, người dùng có thể trải nghiệm toàn bộ quá trình học từ - ôn tập - đánh giá mà
-không cần backend hoặc tài khoản.
+# 📚 PHẦN MỀM HỌC TỪ VỰNG TRỰC TUYẾN
 
-  
+Một ứng dụng web giúp người học ghi nhớ từ vựng hiệu quả thông qua flashcard, luyện nghe, và bài kiểm tra tương tác — dễ dùng, thân thiện và hoàn toàn miễn phí.
+
+---
+
+## 👨‍💻 Nhóm phát triển
+
+- **Nguyễn Văn Thành** – 23010191  
+- **Đỗ Thành Long** – 23010174  
+- **Lê Quang Huy** – 23010150  
+- **Nguyễn Trọng Huy** – 23010159  
+
+---
+
+## 📝 Giới thiệu
+
+Trong thời đại hội nhập quốc tế, ngoại ngữ – đặc biệt là tiếng Anh – đã trở thành kỹ năng bắt buộc trong học tập, công việc và cuộc sống. Tuy nhiên, phần lớn người học gặp phải các vấn đề như:
+
+- Ghi nhớ từ vựng kém hiệu quả  
+- Thiếu phương pháp học phù hợp  
+- Ứng dụng hiện tại quá phức tạp hoặc không phù hợp với người mới bắt đầu
+
+**Chúng em xây dựng một ứng dụng học từ vựng trên nền tảng web** — đơn giản, trực quan và tiện lợi, cho phép người dùng học và ghi nhớ từ mới bằng các phương pháp khoa học như lặp lại có kiểm soát, hình ảnh hóa và luyện tập tương tác.
+
+---
+
+## 🎯 Mục tiêu của dự án
+
+- Giúp người học ghi nhớ và sử dụng từ vựng hiệu quả hơn
+- Tạo ra một công cụ học tập thân thiện, dễ tiếp cận với mọi đối tượng
+- Áp dụng kiến thức lập trình, thiết kế giao diện, quản lý dự án vào thực tiễn
+- Xây dựng nền tảng vững chắc để phát triển thêm các tính năng mở rộng trong tương lai
+
+---
+
+## 💡 Các tính năng chính
+
+- 📖 **Flashcard từ vựng**: Hiển thị từ, phiên âm, nghĩa và ví dụ sử dụng
+- 🎧 **Nghe phát âm**: Giúp luyện nghe và nhớ từ vựng sâu hơn
+- 🔁 **Chế độ ôn tập thông minh**: Tập trung vào các từ học chưa chắc
+- ➕ **Thêm từ vựng mới**: Cho phép người dùng mở rộng danh sách học
+
+---
+
+## 👤 Đối tượng sử dụng
+
+- 👨‍🎓 Học sinh, sinh viên đang học tiếng Anh hoặc ngoại ngữ khác  
+- 👩‍💼 Người đi làm cần học từ chuyên ngành hoặc luyện giao tiếp  
+- 👨‍👩‍👧 Phụ huynh, giáo viên hỗ trợ con học từ vựng tại nhà  
+- 🌱 Người mới bắt đầu học ngoại ngữ, muốn có công cụ đơn giản và hiệu quả
+
+---
+
+## 🔍 Vấn đề được giải quyết
+
+- Ghi nhớ từ mới kém hiệu quả, học trước quên sau
+- Thiếu sự tương tác và phản hồi khi học
+- Giao diện học tập phức tạp, gây chán nản
+
+---
+
+## 🚀 Vì sao nên phát triển sản phẩm này?
+
+- 💥 Nhu cầu học từ vựng là **cực kỳ lớn** trong thời đại số
+- 🧠 Ứng dụng các phương pháp ghi nhớ khoa học (Spaced Repetition, Active Recall)
+- 🛠️ Dễ xây dựng MVP, có tiềm năng phát triển thành ứng dụng thực tế
+- 📱 Có thể mở rộng: tích hợp AI, tài khoản người dùng, giao diện mobile, gamification...
+
+---
+
+## 🔧 Hướng tiếp cận
+
+### ✅ Tính khả thi
+
+- Công nghệ sử dụng đơn giản (HTML, CSS, JavaScript) — dễ học, dễ làm
+- Không cần backend phức tạp ở giai đoạn đầu
+- Phù hợp với đồ án môn học hoặc dự án khởi đầu cá nhân
+
+### 📌 MVP (Phiên bản khả dụng tối thiểu)
+
+- Học từ bằng flashcard (xem từ, nghĩa, phiên âm)
+- Thêm từ mới để học
+- Thống kê số từ đã học 
+- Giao diện responsive, chạy tốt trên trình duyệt
+
+---
+
+## 🧪 Công nghệ sử dụng
+
+| Công nghệ | Mục đích |
+|----------|-----------|
+| `HTML/CSS` | Giao diện người dùng |
+| `JavaScript` | Logic hiển thị và xử lý học từ |
+| *(Tuỳ chọn mở rộng)* | React, Firebase, Text-to-Speech API, LocalStorage,... |
+
+---
+
+## 🎯 Định hướng phát triển tương lai
+
+- 🌐 Tích hợp đăng nhập và đồng bộ từ vựng qua nhiều thiết bị  
+- 📱 Giao diện mobile thân thiện hơn (Progressive Web App)  
+- 🔄 Xuất/Nhập từ vựng, chia sẻ danh sách học với người khác  
+
+---
+
+> ✨ Dự án là sự kết hợp giữa công nghệ, tư duy giáo dục và tinh thần sáng tạo. Chúng em mong muốn đóng góp một phần nhỏ vào việc giúp cộng đồng học ngoại ngữ hiệu quả hơn.
+
+---
+
