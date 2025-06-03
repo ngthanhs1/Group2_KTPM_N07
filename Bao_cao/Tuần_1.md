@@ -24,8 +24,8 @@
 => Các thành viên đều đang tích cực học hỏi cách thực hiện và phối hợp phát triển để hướng đến một sản phẩm **thân thiện, dễ dùng và miễn phí** đúng như mục tiêu ban đầu.
 
 __ Đóng góp của từng thành viên tuần này__
-Thành: Phân chia nhiệm vụ cụ thể cho các thành viên, tham gia lên ý tưởng xây dựng và định hướng giao diện, nội dung thiết kế website.
-Long: Thiết kế sơ đồ project giao diện, tạo cấu trúc giao diện trang học cbản.
-Quang Huy:Đóng góp ý kiến về giao diện.
-Trọng Huy:Viết báo cáo cơ bản.
+- Thành: Phân chia nhiệm vụ cụ thể cho các thành viên, tham gia lên ý tưởng xây dựng và định hướng - giao diện, nội dung thiết kế website.
+- Long: Thiết kế sơ đồ project giao diện, tạo cấu trúc giao diện trang học cbản.
+- Quang Huy:Đóng góp ý kiến về giao diện.
+- Trọng Huy:Viết báo cáo cơ bản.
 
