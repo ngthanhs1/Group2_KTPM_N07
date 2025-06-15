@@ -1,155 +1,121 @@
-/* --- Các biến CSS (Custom Properties) --- */
 :root {
-    --primary-blue: #3498db; /* Xanh dương chính */
-    --primary-blue-dark: #2980b9; /* Xanh dương đậm hơn */
-    --light-blue: #ecf0f1; /* Xanh nhạt */
-    --dark-blue: #2c3e50; /* Xám xanh đậm */
-    --gray-text: #7f8c8d; /* Màu chữ xám */
-    --light-gray-bg: #f8f9fa; /* Nền xám nhạt */
-    --border-color: #e0e0e0; /* Màu đường viền */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* Màu đổ bóng */
+   
+    --primary-blue: #3498db; 
+    --primary-blue-dark: #2980b9; 
+    --light-blue: #ecf0f1; 
+    --dark-blue: #2c3e50; 
+    --gray-text: #7f8c8d; 
+    --light-gray-bg: #f8f9fa; 
+    --border-color: #e0e0e0; 
+    --shadow-color: rgba(0, 0, 0, 0.1); 
 
-    --text-color: var(--dark-blue); /* Màu chữ mặc định */
-    --bg-color: linear-gradient(135deg, #e0f2f7 0%, #d4ebf5 100%); /* Nền chính mới */
-    --card-bg: #ffffff; /* Nền thẻ */
-    --button-bg: var(--primary-blue); /* Nền nút */
-    --button-text: #ffffff; /* Chữ nút */
-    --input-bg: #ffffff; /* Nền input */
-    --input-border: var(--border-color); /* Viền input */
-    --card-border: var(--border-color); /* Viền thẻ */
-    --star-color: gold; /* Màu sao */
-    --toast-success-bg: #2ecc71; /* Nền toast thành công */
-    --toast-error-bg: #e74c3c;   /* Nền toast lỗi */
-    --toast-info-bg: #3498db;    /* Nền toast thông tin */
-    --toast-warning-bg: #f39c12; /* Nền toast cảnh báo */
+    --text-color: var(--dark-blue);
+    --bg-color: var(--light-gray-bg);
+    --card-bg: #ffffff;
+    --button-bg: var(--primary-blue);
+    --button-text: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: var(--border-color);
+    --card-border: var(--border-color); /* Cho hiệu ứng shadow thay vì border */
+    --star-color: gold; /* Màu vàng sao */
+    --toast-success-bg: #2ecc71; /* Xanh lá cây */
+    --toast-error-bg: #e74c3c;   /* Đỏ */
 }
 
 /* --- Chế độ tối --- */
 [data-theme='dark'] {
     --text-color: #ecf0f1;
-    --bg-color: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); /* Nền tối gradient */
-    --card-bg: #3d516b;
-    --button-bg: #74b9ff;
-    --button-text: #2c3e50;
-    --input-bg: #3d516b;
-    --input-border: #4a627a;
-    --card-border: #4a627a;
-    --primary-blue: #74b9ff;
-    --primary-blue-dark: #5c8fc9;
-    --dark-blue: #ecf0f1; /* Đổi màu dark-blue trong dark mode để dùng làm màu chữ */
-    --gray-text: #bdc3c7;
+    --bg-color: var(--dark-blue);
+    --card-bg: #34495e;
+    --button-bg: var(--primary-blue-dark);
+    --button-text: #ffffff;
+    --input-bg: #4a6780;
+    --input-border: #5e7a90;
+    --card-border: #4a6780;
+    --star-color: #ffd700;
+    --toast-success-bg: #27ae60;
+    --toast-error-bg: #c0392b;
 }
 
+/* --- Thiết lập chung --- */
 html, body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Bao gồm padding và border trong width/height */
 }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: var(--bg-color); /* Áp dụng biến nền mới */
-    background-attachment: fixed; /* Giữ nền cố định khi cuộn */
+    background: linear-gradient(135deg, #f4e0f7 0%, #d9d4f5 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     color: var(--text-color);
-    transition: background 0.3s ease, color 0.3s ease; /* Transition cho background cũng */
-    min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box; /* Đảm bảo padding không làm tràn width */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh; /* Đảm bảo body chiếm toàn bộ chiều cao màn hình */
+    padding: 20px; /* Thêm padding tổng thể */
 }
 
 .container {
-    background-color: transparent; /* Giữ nền container trong suốt để thấy body background */
     display: flex;
-    flex-direction: column;
-    gap: 25px;
-    padding: 30px;
-    border-radius: 15px;
-    /* box-shadow: 0 15px 30px var(--shadow-color); */ /* Có thể bỏ box-shadow để giao diện phẳng hơn */
+    flex-direction: column; /* Đặt các phần tử theo cột */
     width: 100%;
-    max-width: 800px; /* Giới hạn chiều rộng tối đa */
-    margin: auto; /* Căn giữa container */
+    max-width: 900px; /* Giới hạn chiều rộng tối đa */
+    background-color: var(--card-bg); /* Sử dụng màu nền của card cho container để tạo khối */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px var(--shadow-color); /* Bóng đổ mềm mại */
+    padding: 30px;
+    gap: 20px; /* Khoảng cách giữa các khối chính */
 }
 
+/* --- Tiêu đề ứng dụng --- */
 h1 {
-    text-align: center;
     color: var(--primary-blue);
+    text-align: center;
     margin-bottom: 25px;
     font-size: 2.5em;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    font-weight: 700;
 }
 
-/* --- Card Styles --- */
+/* --- Phần thẻ từ vựng --- */
 .card-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 450px;
-    height: 300px;
-    margin: 20px auto 0 auto; /* Căn giữa card wrapper */
     display: flex;
-    justify-content: center; 
+    flex-direction: column;
     align-items: center;
-}
-
-.star-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
-    color: var(--gray-text); /* Màu xám khi chưa gắn sao */
-    transition: color 0.2s ease, transform 0.2s ease;
-    z-index: 10; /* Đảm bảo nút sao nằm trên thẻ */
-}
-
-.star-button.starred {
-    color: var(--star-color); /* Màu vàng khi gắn sao */
-    text-shadow: 0 0 5px var(--star-color);
-}
-
-.star-button:hover {
-    transform: scale(1.1);
+    gap: 15px; /* Khoảng cách giữa thẻ và các nút điều hướng */
+    position: relative; /* Cho vị trí của toast */
 }
 
 .card-container {
     width: 100%;
-    height: 100%;
-    perspective: 1000px;
-    margin-top: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px; /* Đảm bảo chiều cao tối thiểu để tránh layout nhảy */
 }
 
 .card {
     width: 100%;
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    cursor: pointer;
-    position: relative;
-    transform-origin: center;
-    transform: rotateY(0deg); /* Chỉnh thành rotateY để lật ngang */
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px var(--shadow-color);
-    display: flex; /* Dùng flexbox để căn giữa nội dung */
-    justify-content: center;
-    align-items: center;
-}
-
-.card.flipped {
-    transform: rotateY(180deg);
+    max-width: 500px; /* Giới hạn chiều rộng thẻ */
+    height: 300px;
+    perspective: 1000px;
 }
 
 .card-inner {
     width: 100%;
     height: 100%;
-    position: absolute;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Hiệu ứng lật mượt hơn */
     transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    transform-origin: center;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
 }
 
 .card-front, .card-back {
@@ -160,66 +126,37 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
-    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow-color);
     padding: 20px;
     box-sizing: border-box;
-    border-radius: 15px;
-    color: var(--text-color);
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 700;
+    word-break: break-word; /* Đảm bảo từ dài không tràn */
+    line-height: 1.4;
 }
 
 .card-front {
     background-color: var(--card-bg);
-    z-index: 2;
-    transform: rotateY(0deg);
-    border: 2px solid var(--primary-blue); /* Viền màu xanh nổi bật */
+    color: var(--text-color);
 }
 
 .card-back {
-    background-color: var(--card-bg);
+    background-color: var(--primary-blue); /* Mặt sau màu xanh nổi bật */
+    color: #ffffff;
     transform: rotateY(180deg);
-    border: 2px solid var(--primary-blue-dark); /* Viền màu xanh đậm hơn cho mặt sau */
+    font-size: 1.5em;
+    font-weight: 400;
 }
 
-/* Đảm bảo nội dung trong card-front được căn giữa và có thể bao gồm icon */
-.card-front-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    flex-wrap: wrap; /* Cho phép từ và icon xuống dòng nếu quá dài */
-    word-break: break-word; /* Ngắt từ nếu quá dài */
-}
-
-/* --- Speaker Icon Style --- */
-.speaker-icon {
-    font-size: 1.5em; /* Kích thước icon */
-    cursor: pointer; /* Biến con trỏ thành bàn tay khi rê chuột */
-    margin-left: 10px; /* Khoảng cách với từ */
-    color: var(--primary-blue); /* Màu sắc của icon */
-    transition: color 0.2s ease, transform 0.2s ease;
-    vertical-align: middle; /* Căn giữa theo chiều dọc với text */
-}
-
-.speaker-icon:hover {
-    color: var(--dark-blue); /* Màu khi rê chuột qua */
-    transform: scale(1.1); /* Phóng to nhẹ khi hover */
-}
-
-.word-index {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 1.1em;
-    color: var(--gray-text);
-}
-
-/* --- Navigation Buttons --- */
+/* --- Các nút điều hướng thẻ --- */
 .navigation-buttons {
     display: flex;
-    justify-content: center;
     gap: 15px;
-    margin-top: 25px;
-    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    margin-top: 15px;
+    width: 100%;
+    justify-content: center;
 }
 
 .navigation-buttons button {
@@ -231,8 +168,8 @@ h1 {
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    flex: 1; /* Chia đều không gian */
-    max-width: 150px;
+    flex-grow: 1; /* Cho phép các nút giãn nở */
+    max-width: 150px; /* Giới hạn chiều rộng nút */
 }
 
 .navigation-buttons button:hover {
@@ -240,162 +177,135 @@ h1 {
     transform: translateY(-2px);
 }
 
+.navigation-buttons button:active {
+    transform: translateY(0);
+}
+
 .navigation-buttons button:disabled {
-    background-color: var(--light-gray-bg);
-    color: var(--gray-text);
+    background-color: var(--border-color);
     cursor: not-allowed;
+    color: var(--gray-text);
     transform: none;
 }
 
-/* --- Action Section (Input and Buttons) --- */
+/* --- Chỉ số từ vựng --- */
+.word-index {
+    font-size: 1em;
+    color: var(--gray-text);
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* --- Phần thêm, xóa, tìm kiếm --- */
 .action-section {
-    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 30px;
+    padding: 25px;
+    background-color: var(--light-gray-bg);
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Bóng đổ nổi nhẹ */
 }
 
 .input-group {
     display: flex;
-    flex-direction: column;
     gap: 10px;
+    flex-wrap: wrap; /* Cho phép input xuống dòng trên màn hình nhỏ */
 }
 
 .input-group input[type="text"] {
-    width: 100%;
+    flex: 1; /* Cho phép input giãn nở */
     padding: 12px 15px;
     border: 1px solid var(--input-border);
     border-radius: 8px;
-    font-size: 1em;
     background-color: var(--input-bg);
     color: var(--text-color);
-    box-sizing: border-box; /* Đảm bảo padding không làm tràn width */
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    min-width: 150px; /* Giới hạn chiều rộng tối thiểu cho input */
 }
 
 .input-group input[type="text"]::placeholder {
     color: var(--gray-text);
-    opacity: 0.7;
 }
 
 .input-group input[type="text"]:focus {
-    outline: none;
     border-color: var(--primary-blue);
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+    outline: none;
 }
 
 .action-buttons {
     display: flex;
-    flex-wrap: wrap; /* Cho phép các nút xuống dòng trên màn hình nhỏ */
-    gap: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
     justify-content: center; /* Căn giữa các nút */
 }
 
-.action-buttons button,
-.action-buttons .link-cambridge {
+.action-buttons button, .action-buttons a {
     padding: 12px 20px;
     border: none;
     border-radius: 8px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    text-decoration: none; /* Cho link */
-    text-align: center; /* Cho link */
-    white-space: nowrap; /* Ngăn text bị ngắt dòng */
+    text-decoration: none; /* Cho thẻ a */
+    display: flex; /* Đảm bảo a cũng căn chỉnh như button */
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap; /* Tránh xuống dòng chữ nút */
 }
 
-.action-buttons button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-}
-
-.action-buttons button:hover {
+.action-buttons button:hover, .action-buttons a:hover {
     background-color: var(--primary-blue-dark);
     transform: translateY(-2px);
 }
 
-.action-buttons button:disabled {
-    background-color: var(--light-gray-bg);
-    color: var(--gray-text);
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Kiểu cho nút Add/Save khi ở chế độ Edit */
-#add-edit-word-btn[data-mode="edit"] {
-    background-color: #f39c12; /* Màu cam */
-    color: white;
-}
-
-#add-edit-word-btn[data-mode="edit"]:hover {
-    background-color: #e67e22;
-}
-
-/* Màu sắc đặc biệt cho nút Edit */
-#edit-current-word-btn {
-    background-color: #2ecc71; /* Xanh lá cây */
-    color: white;
-}
-
-#edit-current-word-btn:hover {
-    background-color: #27ae60;
+.action-buttons button:active, .action-buttons a:active {
+    transform: translateY(0);
 }
 
 .link-cambridge {
-    background-color: #95a5a6; /* Màu xám cho link */
-    color: white;
-    display: flex;
-    align-items: center; /* Căn giữa chữ trong link */
+    background-color: #f39c12; /* Màu vàng cam cho link từ điển */
 }
 
 .link-cambridge:hover {
-    background-color: #7f8c8d;
-    transform: translateY(-2px);
+    background-color: #e67e22;
 }
 
-/* --- Toggle Group --- */
+/* --- Toggle Switches (Sao, Chủ đề, Ôn tập) --- */
 .toggle-group {
     display: flex;
-    flex-wrap: wrap; /* Cho phép xuống dòng */
-    justify-content: center;
-    gap: 25px; /* Khoảng cách giữa các toggle item */
-    margin-top: 30px;
+    justify-content: center; /* Căn giữa các toggle group */
+    gap: 25px; /* Khoảng cách giữa các toggle */
+    margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .toggle-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background-color: var(--card-bg);
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px var(--shadow-color);
+    gap: 8px;
 }
 
 .toggle-label {
-    font-size: 1.1em;
+    font-size: 1em;
     color: var(--text-color);
-    white-space: nowrap; /* Ngăn chữ bị ngắt dòng */
-}
-
-.toggle-status {
-    font-weight: bold;
-    color: var(--primary-blue);
-    min-width: 30px; /* Đảm bảo đủ chỗ cho chữ On/Off */
-    text-align: right;
+    white-space: nowrap;
 }
 
 .toggle-switch {
-    width: 55px;
+    width: 50px;
     height: 25px;
-    background-color: var(--gray-text);
-    border-radius: 15px;
+    background-color: var(--border-color);
+    border-radius: 25px;
     position: relative;
     cursor: pointer;
+    transition: background-color 0.3s ease;
     border: none;
     padding: 0;
-    transition: background-color 0.3s ease;
-    flex-shrink: 0; /* Không co lại */
 }
 
 .toggle-switch[data-state="1"] {
@@ -405,43 +315,76 @@ h1 {
 .toggle-circle {
     width: 21px;
     height: 21px;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 50%;
     position: absolute;
     top: 2px;
     left: 2px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .toggle-switch[data-state="1"] .toggle-circle {
-    transform: translateX(30px);
+    transform: translateX(25px);
+}
+
+.toggle-status {
+    font-size: 0.9em;
+    color: var(--gray-text);
+    min-width: 30px; /* Đảm bảo đủ chỗ cho chữ "Off"/"On" */
+}
+
+/* --- Nút ngôi sao --- */
+.star-button {
+    background: none;
+    border: none;
+    font-size: 2.2em; /* Kích thước icon ngôi sao */
+    cursor: pointer;
+    color: var(--gray-text); /* Màu xám mặc định */
+    transition: color 0.2s ease, transform 0.2s ease;
+    position: absolute; /* Vị trí tuyệt đối trong card-wrapper */
+    top: 10px; /* Điều chỉnh vị trí */
+    right: 10px;
+    z-index: 10; /* Đảm bảo nằm trên thẻ */
+    padding: 5px; /* Vùng click rộng hơn */
+}
+
+.star-button.starred {
+    color: var(--star-color); /* Màu vàng khi được gắn sao */
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); /* Hiệu ứng tỏa sáng nhẹ */
+}
+
+.star-button:hover {
+    transform: scale(1.1);
 }
 
 /* --- Upload Container --- */
 .upload-container {
     display: flex;
+    flex-direction: column; /* Xếp file input và nút theo cột */
     align-items: center;
     gap: 10px;
-    margin-top: 25px;
-    flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
-    justify-content: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--light-gray-bg);
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .upload-container input[type="file"] {
     font-size: 1em;
-    padding: 8px; /* Tăng padding cho file input */
+    padding: 10px;
     border: 1px solid var(--input-border);
-    border-radius: 8px; /* Bo tròn góc */
+    border-radius: 8px;
     background-color: var(--input-bg);
     color: var(--text-color);
-    cursor: pointer;
-    flex: 1; /* Cho phép co giãn */
-    min-width: 150px;
-    max-width: 300px;
+    width: 100%;
+    max-width: 300px; /* Giới hạn chiều rộng input file */
+    box-sizing: border-box; /* Bao gồm padding trong width */
 }
 
 #upload-btn {
-    padding: 12px 20px;
+    padding: 12px 25px;
     border: none;
     border-radius: 8px;
     background-color: var(--button-bg);
@@ -456,52 +399,143 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* --- Toast Notification --- */
+/* --- Toast Notifications --- */
 .toast-notification {
-    position: fixed;
-    bottom: 20px;
+    position: absolute; /* Vị trí tuyệt đối so với .card-wrapper hoặc .container */
+    bottom: 20px; /* Vị trí ban đầu */
     left: 50%;
     transform: translateX(-50%);
-    background-color: #333;
-    color: white;
+    background-color: var(--dark-blue); /* Màu nền mặc định */
+    color: #ffffff;
     padding: 12px 20px;
     border-radius: 8px;
+    font-size: 0.95em;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 1000;
-    font-size: 0.95em;
-    white-space: nowrap; /* Ngăn thông báo bị ngắt dòng */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, bottom 0.5s ease-out;
+    z-index: 1000; /* Đảm bảo nằm trên cùng */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    min-width: 250px;
+    text-align: center;
 }
 
 .toast-notification.show {
     opacity: 1;
     visibility: visible;
+    bottom: 30px; /* Di chuyển lên một chút khi hiển thị */
 }
 
-.toast-notification.success { background-color: var(--toast-success-bg); }
-.toast-notification.error { background-color: var(--toast-error-bg); }
-.toast-notification.info { background-color: var(--toast-info-bg); }
-.toast-notification.warning { background-color: var(--toast-warning-bg); }
+.toast-notification.success {
+    background-color: var(--toast-success-bg);
+}
 
-/* --- Custom Modal Styles --- */
+.toast-notification.error {
+    background-color: var(--toast-error-bg);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .card {
+        height: 250px; /* Giảm chiều cao thẻ trên màn hình nhỏ */
+    }
+
+    .card-front, .card-back {
+        font-size: 1.5em; /* Giảm font thẻ */
+    }
+
+    .navigation-buttons button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .input-group {
+        flex-direction: column; /* Xếp input theo cột */
+    }
+
+    .action-buttons {
+        flex-direction: column; /* Xếp nút hành động theo cột */
+    }
+
+    .action-buttons button, .action-buttons a {
+        width: 100%; /* Nút chiếm toàn bộ chiều rộng */
+        max-width: none;
+    }
+
+    .toggle-group {
+        flex-direction: column;
+        align-items: flex-start; /* Căn trái các toggle */
+        gap: 15px;
+    }
+
+    .star-button {
+        font-size: 1.8em;
+        top: 5px;
+        right: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .card {
+        height: 220px;
+    }
+
+    .card-front, .card-back {
+        font-size: 1.2em;
+        padding: 15px;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navigation-buttons button {
+        width: 100%;
+    }
+
+    .upload-container input[type="file"] {
+        font-size: 0.9em;
+    }
+}
+
+/* Các kiểu bổ sung cho toggles (nếu có) */
+.learn-toggle-container, .theme-toggle-container {
+    /* Đảm bảo flex và gap đã được xử lý trong .toggle-item và .toggle-group */
+}
+
 .modal {
-    display: none; /* Mặc định ẩn modal */
-    position: fixed; /* Giữ modal ở một vị trí cố định trên màn hình */
-    z-index: 1001; /* Nằm trên mọi thứ khác */
+    display: none; 
+    position: fixed; 
+    z-index: 1001; 
     left: 0;
     top: 0;
-    width: 100%; /* Chiều rộng đầy đủ */
-    height: 100%; /* Chiều cao đầy đủ */
-    overflow: auto; /* Cho phép cuộn nếu nội dung quá lớn */
-    background-color: rgba(0, 0, 0, 0.6); /* Lớp phủ nền mờ */
-    display: flex; /* Dùng flexbox để căn giữa nội dung */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.6); 
+    display: flex; 
     justify-content: center;
     align-items: center;
-    opacity: 0; /* Bắt đầu với độ mờ 0 */
-    visibility: hidden; /* Ẩn hoàn toàn */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng chuyển động */
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.3s ease, visibility 0.3s ease; 
 }
 
 .modal.show {
@@ -510,21 +544,21 @@ h1 {
 }
 
 .modal-content {
-    background-color: var(--card-bg); /* Nền modal */
+    background-color: var(--card-bg); 
     margin: auto;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    position: relative; /* Cho close button */
+    position: relative; 
     max-width: 500px;
-    width: 90%; /* Responsive width */
+    width: 90%; 
     text-align: center;
-    transform: translateY(-50px); /* Bắt đầu hơi dịch lên */
+    transform: translateY(-50px); 
     transition: transform 0.3s ease;
 }
 
 .modal.show .modal-content {
-    transform: translateY(0); /* Trượt vào vị trí khi hiển thị */
+    transform: translateY(0); 
 }
 
 .modal-content h2 {
@@ -580,7 +614,7 @@ h1 {
 }
 
 .confirm-button {
-    background-color: #e74c3c; /* Màu đỏ cho nút xóa */
+    background-color: #e74c3c; 
     color: white;
 }
 
@@ -590,7 +624,7 @@ h1 {
 }
 
 .cancel-button {
-    background-color: var(--button-bg); /* Màu xanh chính của ứng dụng */
+    background-color: var(--button-bg); 
     color: var(--button-text);
 }
 
@@ -598,85 +632,26 @@ h1 {
     background-color: var(--primary-blue-dark);
     transform: translateY(-2px);
 }
-
-
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-        width: 95%;
-        max-width: none;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
-    .card-wrapper {
-        height: 250px;
-    }
-
-    .card-front, .card-back {
-        font-size: 1.8em;
-    }
-
-    .navigation-buttons,
-    .action-buttons,
-    .toggle-group,
-    .upload-container {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .navigation-buttons button,
-    .action-buttons button,
-    .action-buttons .link-cambridge,
-    .upload-container input[type="file"],
-    #upload-btn {
-        width: 100%;
-        max-width: none;
-    }
-
-    .toggle-item {
-        width: 100%;
-        justify-content: space-between;
-        padding: 12px 15px;
-    }
-
-    .toggle-switch {
-        width: 50px;
-        height: 22px;
-    }
-    .toggle-circle {
-        width: 18px;
-        height: 18px;
-    }
-    .toggle-switch[data-state="1"] .toggle-circle {
-        transform: translateX(28px);
-    }
+/* --- Speaker Icon Style --- */
+.speaker-icon {
+    font-size: 1.5em; /* Kích thước icon */
+    cursor: pointer; /* Biến con trỏ thành bàn tay khi rê chuột */
+    margin-left: 10px; /* Khoảng cách với từ */
+    color: var(--primary-blue); /* Màu sắc của icon */
+    transition: color 0.2s ease, transform 0.2s ease;
+    vertical-align: middle; /* Căn giữa theo chiều dọc với text */
 }
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.8em;
-    }
-    .card-wrapper {
-        height: 220px;
-    }
-    .card-front, .card-back {
-        font-size: 1.5em;
-    }
-    .speaker-icon {
-        font-size: 1.2em;
-    }
-    .modal-content {
-        padding: 20px;
-    }
-    .modal-content h2 {
-        font-size: 1.5em;
-    }
-    .modal-buttons button {
-        padding: 10px 15px;
-        font-size: 0.9em;
-    }
+.speaker-icon:hover {
+    color: var(--dark-blue); /* Màu khi rê chuột qua */
+    transform: scale(1.1); /* Phóng to nhẹ khi hover */
+}
+
+/* Đảm bảo nội dung trong card-front được căn giữa và có thể bao gồm icon */
+.card-front-content {
+    display: flex; /* Sử dụng Flexbox */
+    align-items: center; /* Căn giữa các mục theo chiều dọc */
+    justify-content: center; /* Căn giữa các mục theo chiều ngang */
+    height: 100%; /* Đảm bảo chiếm toàn bộ chiều cao của card-front */
+    flex-wrap: wrap; /* Cho phép các mục xuống dòng nếu từ quá dài */
 }
