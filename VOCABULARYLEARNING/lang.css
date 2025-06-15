@@ -48,7 +48,7 @@ html, body {
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--bg-color);
+    background: linear-gradient(135deg, #927098 0%, #d4e6f5 100%);
     display: flex;
     justify-content: center;
     align-items: center;
