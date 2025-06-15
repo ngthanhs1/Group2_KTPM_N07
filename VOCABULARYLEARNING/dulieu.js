@@ -1,12 +1,39 @@
-const savedWords = JSON.parse(localStorage.getItem('words'));
-
-// Nếu có dữ liệu từ vựng, sử dụng dữ liệu đó, nếu không, dùng dữ liệu mặc định
-const words = savedWords || [
+// Danh sách từ vựng mặc định
+const defaultWords = [
     { word: "Web development", definition: "Phát triển web", starred: false },
     { word: "Artificial Intelligence", definition: "Trí tuệ nhân tạo", starred: false },
     { word: "Data Science", definition: "Khoa học dữ liệu", starred: false },
     { word: "Machine Learning", definition: "Học máy", starred: false }
 ];
+
+/**
+ * Lấy danh sách từ vựng từ localStorage (nếu có), nếu không trả về null
+ */
+function loadWordsFromStorage() {
+    try {
+        const raw = localStorage.getItem("words");
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : null;
+    } catch (error) {
+        console.warn("Dữ liệu không hợp lệ trong localStorage:", error);
+        return null;
+    }
+}
+
+/**
+ * Lưu danh sách từ vựng vào localStorage
+ */
+function saveWordsToStorage(words) {
+    localStorage.setItem("words", JSON.stringify(words));
+}
+
+// Khởi tạo danh sách từ vựng
+let words = loadWordsFromStorage();
+
+if (!words) {
+    words = [...defaultWords]; // Dùng bản sao danh sách mặc định
+    saveWordsToStorage(words); // Lưu vào localStorage
+}
 
 // Khởi tạo trạng thái đánh dấu sao từ localStorage nếu có
 words.forEach(word => {
