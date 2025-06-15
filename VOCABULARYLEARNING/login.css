@@ -8,7 +8,9 @@ html, body {
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #b49b9b;
+    background: linear-gradient(-45deg, #f8fafc, #e0c3fc, #a1c4fd, #fbc2eb);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease-in-out infinite;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,12 +31,21 @@ body {
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
+    margin-bottom: 24px; /* Có thể giảm nếu muốn card gần phần nhập từ hơn */
 }
 
 .card {
     width: 450px;
     height: 300px;
     perspective: 1000px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    background: rgba(255,255,255,0.7);
+    transition: box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.25);
 }
 
 .card-inner {
@@ -75,7 +86,7 @@ body {
 
 .word {
     font-size: 35px;
-    padding-top: 40px;
+    padding-top: 10px; /* Giảm từ 40px xuống 10px cho cân đối */
     font-weight: bold;
     text-align: center;
 }
@@ -429,6 +440,72 @@ a:hover {
     margin-top: 5px;
     font-size: 14px;
     color: #555;
+}
+
+/* Bố cục mới: main layout với sidebar phải */
+.main-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    gap: 40px;
+}
+
+.center-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 0%;
+    min-width: 350px;
+    justify-content: center;
+    padding-top: 60px;    /* Thêm dòng này để đẩy card xuống giữa hơn */
+    padding-bottom: 40px; /* Thêm dòng này để tạo khoảng cách dưới */
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 260px;
+    max-width: 320px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 24px 18px;
+    margin-top: 30px;
+}
+
+.sidebar .add-word-container,
+.sidebar .search-section,
+.sidebar .upload-container,
+.sidebar .toggle-container {
+    margin-bottom: 10px;
+}
+
+.sidebar a, .sidebar button {
+    width: 100%;
+    margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+    .main-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+    .sidebar {
+        margin-top: 0;
+        margin-bottom: 20px;
+        width: 90%;
+        min-width: unset;
+        max-width: unset;
+    }
+    .center-area {
+        justify-content: flex-start; /* Trên mobile vẫn ưu tiên lên trên */
+    }
+    .card-container {
+        margin-bottom: 20px;
+    }
 }
 
 /* Kiểu dáng chung cho 6 nút */
@@ -829,7 +906,31 @@ body {
 .add-word-container input, .word-container input {
     background-color: var(--card-front-bg);
     color: var(--text-color);
-    border: 1px solid var(--card-border);
+    border: 1.5px solid #bdbdbd;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.add-word-container input:focus, .word-container input:focus {
+    border: 1.5px solid #4caf50;
+    box-shadow: 0 2px 12px rgba(76,175,80,0.08);
+}
+
+.add-word-container button, .arrow, #check-btn, #delete-word-btn, #search-btn {
+    border-radius: 8px;
+    background: linear-gradient(90deg, #f8fafc 0%, #e0e7ef 100%);
+    color: #222;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #e0e0e0;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.add-word-container button:hover, .arrow:hover, #check-btn:hover, #delete-word-btn:hover, #search-btn:hover {
+    background: linear-gradient(90deg, #e0e7ef 0%, #f8fafc 100%);
+    box-shadow: 0 4px 16px rgba(76,175,80,0.08);
 }
 
 .toggle-label, .toggle-status {
@@ -939,9 +1040,6 @@ a:hover {
     }
 }
 
-
-
-
 .upload-container {
     display: flex;
     align-items: center;
@@ -991,4 +1089,31 @@ a:hover {
         font-size: 13px;
         padding: 7px 12px;
     }
+}
+
+/* Hiệu ứng background gradient động */
+body {
+    /* ...existing code... */
+    background: linear-gradient(-45deg, #f8fafc, #e0c3fc, #a1c4fd, #fbc2eb);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease-in-out infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Nếu dùng dark mode, chuyển gradient tối hơn */
+body.dark-mode {
+    background: linear-gradient(-45deg, #232526, #414345, #434343, #000000);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease-in-out infinite;
 }

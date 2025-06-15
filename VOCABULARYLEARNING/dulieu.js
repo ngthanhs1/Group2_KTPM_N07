@@ -1014,7 +1014,7 @@ if (themeState === 1) {
 themeToggle.addEventListener('click', () => {
     themeState = (themeState + 1) % 2; // Chuyển đổi giữa 0 (sáng) và 1 (tối)
     themeToggle.setAttribute('data-state', themeState);
-    themeStatus.textContent = themeState === 0 ? 'Sáng' : 'Tối';
+    themeStatus.textContent = themeState === 0 ? 'Sáng' : 'Tìm kiếm';
     document.body.classList.toggle('dark-mode', themeState === 1);
     localStorage.setItem('themeState', themeState);
 });
