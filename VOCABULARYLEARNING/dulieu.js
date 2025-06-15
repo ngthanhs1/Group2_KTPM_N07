@@ -27,24 +27,31 @@ function saveWordsToStorage(words) {
     localStorage.setItem("words", JSON.stringify(words));
 }
 
-// Khởi tạo danh sách từ vựng
-let words = loadWordsFromStorage();
+function getOrInitWords() {
+    const stored = loadWordsFromStorage();
+    if (stored) return stored;
 
-if (!words) {
-    words = [...defaultWords]; // Dùng bản sao danh sách mặc định
-    saveWordsToStorage(words); // Lưu vào localStorage
+    const defaults = [...defaultWords];
+    saveWordsToStorage(defaults);
+    return defaults;
 }
 
-// Khởi tạo trạng thái đánh dấu sao từ localStorage nếu có
-words.forEach(word => {
-    if (word.starred === undefined) {
-        word.starred = false;
-    }
-});
+const words = getOrInitWords();
 
+// Chuẩn hóa danh sách từ vựng: đảm bảo có thuộc tính 'starred'
+function normalizeWords(wordsList) {
+    return wordsList.map(word => ({
+        ...word,
+        starred: word.starred ?? false
+    }));
+}
+
+// Khởi tạo ứng dụng
+let words = normalizeWords(getOrInitWords());
+let filteredWords = [...words]; // Bản sao dùng để lọc
 let currentIndex = 0;
 let enterHandledInInput = false;
-let filteredWords = words; // Danh sách từ hiển thị sau khi lọc
+
 
 // Lấy trạng thái toggle từ localStorage, mặc định là "0" (Off)
 const savedToggleState = localStorage.getItem('learnToggleState') || "0";
