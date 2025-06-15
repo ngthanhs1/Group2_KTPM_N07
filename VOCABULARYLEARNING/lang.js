@@ -18,13 +18,15 @@ words.forEach(word => {
 let currentIndex = 0;
 let enterHandledInInput = false;
 let filteredWords = words; // Danh sách từ hiển thị sau khi lọc
+let editingWordOriginalIndex = -1; // Lưu chỉ số của từ đang được chỉnh sửa trong mảng 'words' gốc
 
 // Lấy các phần tử DOM (Đã cập nhật và thêm các ID mới)
 const cardContainer = document.getElementById('card-container');
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 const shuffleButton = document.getElementById('shuffle'); // Thêm nút shuffle
-const addWordBtn = document.getElementById('add-word-btn');
+const addEditWordBtn = document.getElementById('add-edit-word-btn'); // Nút Add/Save
+const editCurrentWordBtn = document.getElementById('edit-current-word-btn'); // Nút Edit
 const newWordInput = document.getElementById('new-word');
 const newDefinitionInput = document.getElementById('new-definition');
 const deleteWordBtn = document.getElementById('delete-word-btn');
@@ -41,12 +43,14 @@ const uploadBtn = document.getElementById('upload-btn');
 const starButton = document.getElementById('star-button'); // Nút ngôi sao trên thẻ
 const wordIndexDisplay = document.getElementById('word-index'); // Thêm phần tử hiển thị chỉ số từ
 const toastNotification = document.getElementById('toast-notification'); // Thêm toast notification
+
 // Modal Elements
 const deleteConfirmModal = document.getElementById('deleteConfirmModal');
 const closeDeleteModalBtn = document.getElementById('closeDeleteModalBtn');
 const wordToDeleteSpan = document.getElementById('wordToDelete');
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+
 
 // --- Hàm hiển thị thông báo (Toast Notification) ---
 function showToast(message, type = 'info', duration = 3000) {
@@ -74,6 +78,8 @@ function updateCard(index) {
         nextButton.disabled = true;
         shuffleButton.disabled = true; // Vô hiệu hóa shuffle khi không có từ
         starButton.style.display = 'none'; // Ẩn nút sao
+        editCurrentWordBtn.disabled = true; // Vô hiệu hóa nút Edit
+        deleteWordBtn.disabled = true; // Vô hiệu hóa nút Delete
         return;
     }
 
@@ -93,7 +99,12 @@ function updateCard(index) {
     cardContainer.innerHTML = `
         <div class="card" id="current-card">
             <div class="card-inner" id="card-inner">
-                <div class="card-front">${currentWord.word}</div>
+                <div class="card-front">
+                    <div class="card-front-content">
+                        ${currentWord.word} 
+                        <span class="speaker-icon" id="speakWordBtn" data-text="${currentWord.word}">🔊</span>
+                    </div>
+                </div>
                 <div class="card-back">${currentWord.definition}</div>
             </div>
         </div>
@@ -110,15 +121,47 @@ function updateCard(index) {
     // Cập nhật chỉ số từ
     wordIndexDisplay.textContent = `${currentIndex + 1}/${filteredWords.length}`;
 
-    // Cập nhật trạng thái nút điều hướng
+    // Cập nhật trạng thái nút điều hướng và chức năng
     prevButton.disabled = (filteredWords.length <= 1);
     nextButton.disabled = (filteredWords.length <= 1);
     shuffleButton.disabled = (filteredWords.length <= 1);
+    editCurrentWordBtn.disabled = false; // Bật lại nút Edit
+    deleteWordBtn.disabled = false; // Bật lại nút Delete
+
 
     // Xử lý sự kiện lật thẻ
     document.getElementById('current-card').addEventListener('click', () => {
         document.getElementById('current-card').classList.toggle('flipped');
     });
+
+    // --- LOGIC PHÁT ÂM ---
+    const speakWordBtn = document.getElementById('speakWordBtn');
+    if (speakWordBtn) {
+        speakWordBtn.addEventListener('click', (event) => {
+            event.stopPropagation(); // Ngăn sự kiện click này lan ra thẻ và làm lật thẻ
+            const textToSpeak = event.target.dataset.text;
+            speakText(textToSpeak, 'en-US'); // Gọi hàm phát âm
+        });
+    }
+}
+
+// --- Hàm phát âm văn bản ---
+function speakText(text, lang = 'en-US', rate = 1.0, pitch = 1.0) {
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang; // Ngôn ngữ (ví dụ: 'en-US' cho tiếng Anh, 'vi-VN' cho tiếng Việt)
+        utterance.rate = rate; // Tốc độ nói (0.1 - 10, mặc định 1)
+        utterance.pitch = pitch; // Cao độ (0 - 2, mặc định 1)
+
+        // Tùy chọn: Chọn giọng đọc cụ thể (nếu bạn muốn)
+        // const voices = window.speechSynthesis.getVoices();
+        // utterance.voice = voices.find(voice => voice.name === 'Google US English'); // Ví dụ chọn giọng
+
+        window.speechSynthesis.speak(utterance);
+    } else {
+        showToast('Trình duyệt của bạn không hỗ trợ tính năng phát âm.', 'error', 3000);
+        console.warn('SpeechSynthesis API not supported in this browser.');
+    }
 }
 
 // --- Hàm lọc từ vựng ---
@@ -142,18 +185,30 @@ function filterWords() {
     }
 }
 
+// --- Hàm để reset chế độ chỉnh sửa về chế độ thêm mới ---
+function resetEditMode() {
+    addEditWordBtn.textContent = 'Add';
+    addEditWordBtn.dataset.mode = 'add';
+    newWordInput.value = '';
+    newDefinitionInput.value = '';
+    editingWordOriginalIndex = -1;
+    newWordInput.focus(); // Focus lại vào ô nhập từ mới
+}
+
 // --- Event Listeners ---
 
 // Nút Previous
 prevButton.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + filteredWords.length) % filteredWords.length;
     updateCard(currentIndex);
+    resetEditMode(); // Reset chế độ chỉnh sửa khi chuyển thẻ
 });
 
 // Nút Next
 nextButton.addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % filteredWords.length;
     updateCard(currentIndex);
+    resetEditMode(); // Reset chế độ chỉnh sửa khi chuyển thẻ
 });
 
 // Nút Shuffle
@@ -166,17 +221,23 @@ shuffleButton.addEventListener('click', () => {
         }
         currentIndex = 0; // Hiển thị từ đầu tiên sau khi trộn
         updateCard(currentIndex);
+        resetEditMode(); // Reset chế độ chỉnh sửa khi trộn
         showToast('Đã trộn ngẫu nhiên danh sách từ!', 'info');
     }
 });
 
-// Thêm từ mới
-addWordBtn.addEventListener('click', () => {
+// Xử lý nút Add/Save Changes
+addEditWordBtn.addEventListener('click', () => {
     const word = newWordInput.value.trim();
     const definition = newDefinitionInput.value.trim();
 
-    if (word && definition) {
-        // Kiểm tra từ trùng lặp (không phân biệt chữ hoa/thường)
+    if (!word || !definition) {
+        showToast('Vui lòng nhập cả từ và nghĩa!', 'error');
+        return;
+    }
+
+    if (addEditWordBtn.dataset.mode === 'add') {
+        // --- CHẾ ĐỘ THÊM MỚI ---
         const isDuplicate = words.some(w => w.word.toLowerCase() === word.toLowerCase());
         if (isDuplicate) {
             showToast('Từ này đã tồn tại trong danh sách!', 'error');
@@ -186,15 +247,76 @@ addWordBtn.addEventListener('click', () => {
         words.push({ word, definition, starred: false });
         localStorage.setItem('words', JSON.stringify(words));
         showToast('Đã thêm từ mới thành công!', 'success');
-        newWordInput.value = '';
-        newDefinitionInput.value = '';
+        resetEditMode(); // Reset input và mode
         filterWords(); // Cập nhật lại danh sách sau khi thêm
         currentIndex = filteredWords.length - 1; // Chuyển đến từ vừa thêm
         updateCard(currentIndex);
-    } else {
-        showToast('Vui lòng nhập cả từ và nghĩa!', 'error');
+
+    } else if (addEditWordBtn.dataset.mode === 'edit') {
+        // --- CHẾ ĐỘ CHỈNH SỬA ---
+        if (editingWordOriginalIndex === -1) {
+            showToast('Không có từ nào đang được chỉnh sửa!', 'error');
+            return;
+        }
+
+        const originalWordObject = words[editingWordOriginalIndex];
+
+        // Kiểm tra xem có từ nào khác trong danh sách (trừ từ đang sửa) có cùng từ mới không
+        const isDuplicate = words.some((w, idx) =>
+            idx !== editingWordOriginalIndex && w.word.toLowerCase() === word.toLowerCase()
+        );
+
+        if (isDuplicate) {
+            showToast('Từ mới này đã tồn tại ở một từ khác!', 'error');
+            return;
+        }
+
+        // Cập nhật từ trong mảng gốc
+        originalWordObject.word = word;
+        originalWordObject.definition = definition;
+        localStorage.setItem('words', JSON.stringify(words));
+        showToast('Đã cập nhật từ thành công!', 'success');
+
+        resetEditMode(); // Reset về chế độ "Add"
+        filterWords(); // Cập nhật lại danh sách sau khi sửa
+        // Tìm lại index của từ vừa sửa trong filteredWords để hiển thị
+        currentIndex = filteredWords.findIndex(w => w.word === word && w.definition === definition);
+        if (currentIndex === -1 && filteredWords.length > 0) { // Nếu không tìm thấy (do bộ lọc)
+            currentIndex = 0; // Chuyển về từ đầu tiên
+        } else if (filteredWords.length === 0) {
+             currentIndex = 0;
+        }
+        updateCard(currentIndex);
     }
 });
+
+// Nút Edit - Bắt đầu chỉnh sửa từ hiện tại
+editCurrentWordBtn.addEventListener('click', () => {
+    if (filteredWords.length === 0) {
+        showToast('Không có từ nào để chỉnh sửa!', 'info');
+        return;
+    }
+
+    const currentWord = filteredWords[currentIndex];
+    newWordInput.value = currentWord.word;
+    newDefinitionInput.value = currentWord.definition;
+
+    // Tìm chỉ số của từ hiện tại trong mảng `words` gốc
+    editingWordOriginalIndex = words.findIndex(w => w.word === currentWord.word && w.definition === currentWord.definition);
+
+    if (editingWordOriginalIndex === -1) {
+        showToast('Không thể tìm thấy từ để chỉnh sửa. Vui lòng thử lại.', 'error');
+        resetEditMode(); // Reset input và mode
+        return;
+    }
+
+    // Chuyển nút Add thành Save Changes
+    addEditWordBtn.textContent = 'Save Changes';
+    addEditWordBtn.dataset.mode = 'edit';
+    newWordInput.focus(); // Tập trung vào ô nhập từ để bắt đầu chỉnh sửa
+    showToast(`Đang chỉnh sửa từ "${currentWord.word}". Nhấn "Save Changes" để lưu.`, 'info', 4000);
+});
+
 
 // Xóa từ (sử dụng Modal tùy chỉnh)
 deleteWordBtn.addEventListener('click', () => {
@@ -216,17 +338,18 @@ deleteWordBtn.addEventListener('click', () => {
             words.splice(originalIndex, 1);
             localStorage.setItem('words', JSON.stringify(words));
             showToast(`Đã xóa từ "${wordToDelete}" thành công!`, 'success');
+            resetEditMode(); // Reset chế độ chỉnh sửa sau khi xóa
         }
 
         filterWords(); // Cập nhật lại danh sách sau khi xóa
 
         // Điều chỉnh currentIndex sau khi xóa
-        if (currentIndex >= filteredWords.length && filteredWords.length > 0) {
-            currentIndex = filteredWords.length - 1;
-        } else if (filteredWords.length === 0) {
+        if (filteredWords.length > 0) {
+            currentIndex = Math.min(currentIndex, filteredWords.length - 1);
+        } else {
             currentIndex = 0;
         }
-
+        
         updateCard(currentIndex);
         deleteConfirmModal.classList.remove('show'); // Ẩn modal sau khi xóa
     };
@@ -270,22 +393,22 @@ searchBtn.addEventListener('click', () => {
         showToast(`Đã tìm thấy từ "${filteredWords[currentIndex].word}"!`, 'success');
     } else {
         showToast('Không tìm thấy từ nào phù hợp.', 'info');
-        // Không thay đổi currentIndex hay card nếu không tìm thấy
     }
+    resetEditMode(); // Reset chế độ chỉnh sửa khi tìm kiếm
 });
 
-// Xử lý Enter trong input (có thể thêm logic riêng cho mỗi input nếu cần)
+// Xử lý Enter trong input
 newWordInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        e.preventDefault(); // Ngăn Enter tạo dòng mới
-        newDefinitionInput.focus(); // Chuyển sang ô nghĩa
+        e.preventDefault();
+        newDefinitionInput.focus();
     }
 });
 
 newDefinitionInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
-        addWordBtn.click(); // Kích hoạt nút Add
+        addEditWordBtn.click(); // Kích hoạt nút Add/Save
     }
 });
 
@@ -301,6 +424,11 @@ starButton.addEventListener('click', () => {
     if (filteredWords.length > 0) {
         const currentWord = filteredWords[currentIndex];
         currentWord.starred = !currentWord.starred;
+        // Cập nhật từ trong mảng 'words' gốc cũng, không chỉ filteredWords
+        const originalIndex = words.findIndex(w => w.word === currentWord.word && w.definition === currentWord.definition);
+        if (originalIndex > -1) {
+             words[originalIndex].starred = currentWord.starred;
+        }
         localStorage.setItem('words', JSON.stringify(words)); // Cập nhật toàn bộ danh sách từ
         updateCard(currentIndex); // Cập nhật lại thẻ để hiển thị trạng thái sao
         showToast(`Từ "${currentWord.word}" đã ${currentWord.starred ? 'được gắn sao' : 'bỏ gắn sao'}.`, 'info');
@@ -320,6 +448,7 @@ starToggle.addEventListener('click', () => {
     filterWords(); // Lọc lại từ
     currentIndex = 0; // Reset về từ đầu tiên của danh sách đã lọc
     updateCard(currentIndex);
+    resetEditMode(); // Reset chế độ chỉnh sửa khi lọc
     showToast(`Chế độ "Từ đã gắn sao" đã ${starToggle.dataset.state === "1" ? 'BẬT' : 'TẮT'}.`, 'info');
 });
 
@@ -336,6 +465,7 @@ learnToggle.addEventListener('click', () => {
     filterWords(); // Lọc lại từ
     currentIndex = 0; // Reset về từ đầu tiên của danh sách đã lọc
     updateCard(currentIndex);
+    resetEditMode(); // Reset chế độ chỉnh sửa khi lọc
     showToast(`Chế độ "Ôn tập" đã ${learnToggle.dataset.state === "1" ? 'BẬT' : 'TẮT'}.`, 'info');
 });
 
@@ -373,17 +503,17 @@ uploadBtn.addEventListener('click', () => {
                 }
 
                 const lines = text.split(/\r?\n/).map(line => line.trim()).filter(line => line.length > 0);
-                const newWords = [];
-                let currentWord = null;
+                const newWordsFromFile = [];
+                let currentWordObject = null;
 
                 for (let i = 0; i < lines.length; i++) {
                     const line = lines[i];
-                    if (!currentWord) {
-                        currentWord = { word: line, definition: "", starred: false };
+                    if (!currentWordObject) {
+                        currentWordObject = { word: line, definition: "", starred: false };
                     } else {
-                        currentWord.definition = line;
-                        newWords.push(currentWord);
-                        currentWord = null;
+                        currentWordObject.definition = line;
+                        newWordsFromFile.push(currentWordObject);
+                        currentWordObject = null;
                         // Bỏ qua dòng trống tiếp theo (nếu có)
                         if (i + 1 < lines.length && !lines[i + 1].trim()) {
                             i++;
@@ -395,38 +525,43 @@ uploadBtn.addEventListener('click', () => {
                 let duplicateCount = 0;
                 let skippedCount = 0;
 
-                newWords.forEach(newWord => {
+                // Xử lý từ mới từ file, kiểm tra trùng lặp và thêm vào danh sách chính
+                newWordsFromFile.forEach(newWord => {
                     if (newWord.word && newWord.definition) {
-                        const existingWords = words.filter(w => w.word.toLowerCase() === newWord.word.toLowerCase());
-                        if (existingWords.length > 0) {
+                        const isDuplicate = words.some(w => 
+                            w.word.toLowerCase() === newWord.word.toLowerCase() && 
+                            w.definition.toLowerCase() === newWord.definition.toLowerCase()
+                        );
+                        
+                        if (isDuplicate) {
                             duplicateCount++;
-                            const existingList = existingWords.map((w, index) => `${index + 1}. "${w.word}" - "${w.definition}"`).join('\n');
-                            const confirmAdd = confirm(`Từ "${newWord.word}" đã tồn tại:\n${existingList}\nBạn có muốn thêm từ mới này không?`);
-                            if (!confirmAdd) {
-                                skippedCount++;
-                                return; // Bỏ qua từ này nếu người dùng không muốn thêm
-                            }
+                        } else {
+                            words.push(newWord);
+                            addedCount++;
                         }
-                        words.push(newWord);
-                        addedCount++;
+                    } else {
+                        skippedCount++; // Bỏ qua từ thiếu thông tin
                     }
                 });
 
-                if (addedCount > 0) {
+
+                if (addedCount > 0 || duplicateCount > 0 || skippedCount > 0) {
                     localStorage.setItem('words', JSON.stringify(words));
                     filterWords(); // Áp dụng lại bộ lọc nếu có
                     currentIndex = 0; // Reset về từ đầu tiên
                     updateCard(currentIndex);
-                    let msg = `Đã thêm ${addedCount} từ mới từ file!`;
+                    resetEditMode(); // Reset chế độ chỉnh sửa
+
+                    let msg = `Hoàn thành tải file: Đã thêm ${addedCount} từ.`;
                     if (duplicateCount > 0) {
-                        msg += ` (${duplicateCount} từ trùng lặp, ${skippedCount} đã bỏ qua).`;
+                        msg += ` ${duplicateCount} từ đã tồn tại (đã bỏ qua).`;
                     }
-                    showToast(msg, 'success', 5000);
-                } else if (duplicateCount > 0) {
-                    showToast(`Tất cả ${duplicateCount} từ trong file đã tồn tại và ${skippedCount} từ đã được bỏ qua. Không có từ mới nào được thêm.`, 'info', 5000);
-                }
-                 else {
-                    showToast('Không có từ mới nào được tìm thấy trong file hoặc định dạng không đúng.', 'error', 5000);
+                    if (skippedCount > 0) {
+                        msg += ` ${skippedCount} từ bị bỏ qua (thiếu thông tin).`;
+                    }
+                    showToast(msg, 'success', 6000);
+                } else {
+                    showToast('Không có từ mới nào được tìm thấy hoặc tất cả đều lỗi.', 'error', 5000);
                 }
                 uploadFile.value = ''; // Xóa tên file trên input
             })
@@ -435,22 +570,28 @@ uploadBtn.addEventListener('click', () => {
     reader.readAsArrayBuffer(file);
 });
 
+
 // --- Khởi tạo ứng dụng ---
-// Khởi tạo trạng thái toggle từ localStorage khi tải trang
-const savedLearnToggleState = localStorage.getItem('learnToggleState') || "0";
-learnToggle.dataset.state = savedLearnToggleState;
-learnToggleStatus.textContent = (savedLearnToggleState === "1" ? "On" : "Off");
+// Hàm khởi tạo chính
+function initializeApp() {
+    // Khởi tạo trạng thái toggle từ localStorage khi tải trang
+    const savedLearnToggleState = localStorage.getItem('learnToggleState') || "0";
+    learnToggle.dataset.state = savedLearnToggleState;
+    learnToggleStatus.textContent = (savedLearnToggleState === "1" ? "On" : "Off");
 
-const savedStarToggleState = localStorage.getItem('starToggleState') || "0";
-starToggle.dataset.state = savedStarToggleState;
-starToggleStatus.textContent = (savedStarToggleState === "1" ? "On" : "Off");
+    const savedStarToggleState = localStorage.getItem('starToggleState') || "0";
+    starToggle.dataset.state = savedStarToggleState;
+    starToggleStatus.textContent = (savedStarToggleState === "1" ? "On" : "Off");
 
-const savedThemeState = localStorage.getItem('themeState') || "0"; // Mặc định là light
-themeToggle.dataset.state = savedThemeState;
-document.body.dataset.theme = (savedThemeState === "1" ? "dark" : "light");
-themeToggleStatus.textContent = (savedThemeState === "1" ? "Dark" : "Light");
+    const savedThemeState = localStorage.getItem('themeState') || "0"; // Mặc định là light
+    themeToggle.dataset.state = savedThemeState;
+    document.body.dataset.theme = (savedThemeState === "1" ? "dark" : "light");
+    themeToggleStatus.textContent = (savedThemeState === "1" ? "Dark" : "Light");
 
+    // Áp dụng bộ lọc ban đầu và hiển thị thẻ
+    filterWords();
+    updateCard(currentIndex);
+}
 
-// Áp dụng bộ lọc ban đầu và hiển thị thẻ
-filterWords();
-updateCard(currentIndex);
+// Gọi hàm khởi tạo khi DOM đã sẵn sàng
+document.addEventListener('DOMContentLoaded', initializeApp);

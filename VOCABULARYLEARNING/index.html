@@ -1,98 +1,91 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Master English</title>
-  <link rel="icon" type="image/jpeg" href="img/logo.jpg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="lang.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.17/mammoth.browser.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master English</title>
+    <link rel="icon" type="image/jpeg" href="img/logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="lang.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.17/mammoth.browser.min.js"></script>
 </head>
-
 <body>
-  <div class="container">
-    <h1>Master English</h1>
+    <div class="container">
+        <h1>Master English</h1>
 
-    <!-- Thẻ từ vựng chính -->
-    <div class="card-wrapper">
-      <button id="star-button" class="star-button">★</button> 
-      <div class="card-container" id="card-container"></div>
-      <div class="word-index" id="word-index"></div>
+        <div class="card-wrapper">
+            <button id="star-button" class="star-button">★</button> 
+            <div class="card-container" id="card-container">
+                </div>
+            <div class="word-index" id="word-index"></div>
+        </div>
+
+        <div class="navigation-buttons">
+            <button id="prev">Previous</button>
+            <button id="shuffle">Shuffle</button>
+            <button id="next">Next</button>
+        </div>
+
+        <div class="action-section">
+            <div class="input-group">
+                <input type="text" id="new-word" placeholder="Nhập từ mới" />
+                <input type="text" id="new-definition" placeholder="Nhập nghĩa của từ" />
+                <input type="text" id="search-input" placeholder="Nhập từ cần tìm" />
+            </div>
+            <div class="action-buttons">
+                <button id="add-edit-word-btn" data-mode="add">Add</button> 
+                <button id="delete-word-btn">Delete</button>
+                <button id="search-btn">Search</button>
+                <button id="edit-current-word-btn">Edit</button> <a href="https://dictionary.cambridge.org/" target="_blank" class="link-cambridge">Web tra từ điển</a>
+            </div>
+        </div>
+
+        <div class="toggle-group">
+            <div class="toggle-item">
+                <button id="star-toggle" class="toggle-switch" data-state="0">
+                    <span class="toggle-circle"></span>
+                </button>
+                <span class="toggle-label">Từ đã gắn sao</span>
+                <span class="toggle-status" id="star-toggle-status">Off</span>
+            </div>
+
+            <div class="toggle-item">
+                <button class="toggle-switch" id="theme-toggle" data-state="0">
+                    <span class="toggle-circle"></span>
+                </button>
+                <span class="toggle-label">Chủ đề sáng/tối</span>
+                <span class="toggle-status" id="theme-toggle-status">Light</span>
+            </div>
+
+            <div class="toggle-item">
+                <button class="toggle-switch" id="learn-toggle" data-state="0">
+                    <span class="toggle-circle"></span>
+                </button>
+                <span class="toggle-label">Chế độ ôn tập</span>
+                <span class="toggle-status" id="learn-toggle-status">Off</span>
+            </div>
+        </div>
+        
+        <div class="upload-container">
+            <input type="file" id="upload-file" accept=".docx" />
+            <button id="upload-btn">Tải lên file DOCX</button>
+        </div>
     </div>
 
-    <!-- Điều hướng -->
-    <div class="navigation-buttons">
-      <button id="prev">Previous</button>
-      <button id="shuffle">Shuffle</button>
-      <button id="next">Next</button>
+    <div id="toast-notification" class="toast-notification"></div>
+
+    <div id="deleteConfirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeDeleteModalBtn">&times;</span>
+            <h2>Xác nhận xóa từ vựng</h2>
+            <p>Bạn có chắc chắn muốn xóa từ "<span id="wordToDelete"></span>" này không?</p>
+            <div class="modal-buttons">
+                <button id="confirmDeleteBtn" class="confirm-button">Xóa</button>
+                <button id="cancelDeleteBtn" class="cancel-button">Hủy</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Khu vực nhập liệu và hành động -->
-    <div class="action-section">
-      <div class="input-group">
-        <input type="text" id="new-word" placeholder="Nhập từ mới" />
-        <input type="text" id="new-definition" placeholder="Nhập nghĩa của từ" />
-        <input type="text" id="search-input" placeholder="Nhập từ cần tìm" />
-      </div>
-
-      <div class="action-buttons">
-        <button id="add-word-btn">Add</button>
-        <button id="delete-word-btn">Delete</button>
-        <button id="search-btn">Search</button>
-        <a href="https://dictionary.cambridge.org/" target="_blank" class="link-cambridge">Web tra từ điển</a>
-      </div>
-    </div>
-
-    <!-- Các công tắc chức năng -->
-    <div class="toggle-group">
-      <div class="toggle-item">
-        <button id="star-toggle" class="toggle-switch" data-state="0">
-          <span class="toggle-circle"></span>
-        </button>
-        <span class="toggle-label">Từ đã gắn sao</span>
-        <span class="toggle-status" id="star-toggle-status">Off</span>
-      </div>
-
-      <div class="toggle-item">
-        <button id="theme-toggle" class="toggle-switch" data-state="0">
-          <span class="toggle-circle"></span>
-        </button>
-        <span class="toggle-label">Chủ đề sáng/tối</span>
-        <span class="toggle-status" id="theme-toggle-status">Light</span>
-      </div>
-
-      <div class="toggle-item">
-        <button id="learn-toggle" class="toggle-switch" data-state="0">
-          <span class="toggle-circle"></span>
-        </button>
-        <span class="toggle-label">Chế độ ôn tập</span>
-        <span class="toggle-status" id="learn-toggle-status">Off</span>
-      </div>
-    </div>
-
-    <!-- Upload file DOCX -->
-    <div class="upload-container">
-      <input type="file" id="upload-file" accept=".docx" />
-      <button id="upload-btn">Tải lên file DOCX</button>
-    </div>
-  </div>
-
-  <!-- Thông báo và modal -->
-  <div id="toast-notification" class="toast-notification"></div>
-
-  <div id="deleteConfirmModal" class="modal">
-    <div class="modal-content">
-      <span class="close-button" id="closeDeleteModalBtn">&times;</span>
-      <h2>Xác nhận xóa từ vựng</h2>
-      <p>Bạn có chắc chắn muốn xóa từ "<span id="wordToDelete"></span>" này không?</p>
-      <div class="modal-buttons">
-        <button id="confirmDeleteBtn" class="confirm-button">Xóa</button>
-        <button id="cancelDeleteBtn" class="cancel-button">Hủy</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="lang.js"></script>
-</body>
+    <script src="lang.js"></script>
+    </body>
 </html>
