@@ -40,6 +40,7 @@ Trong thời đại hội nhập quốc tế, ngoại ngữ – đặc biệt l�
 - 🎧 **Nghe phát âm**: Giúp luyện nghe và nhớ từ vựng sâu hơn
 - 🔁 **Chế độ ôn tập thông minh**: Tập trung vào các từ học chưa chắc
 - ➕ **Thêm từ vựng mới**: Cho phép người dùng mở rộng danh sách học
+- 📘 **Phân loại chủ đề**: Cho phép người dùng tạo ra các chủ đề phân loại từ cho dễ học.
 
 ---
 
@@ -88,19 +89,15 @@ Trong thời đại hội nhập quốc tế, ngoại ngữ – đặc biệt l�
 
 ## 🧪 Công nghệ sử dụng
 
-| Công nghệ | Mục đích |
-|----------|-----------|
-| `HTML/CSS` | Giao diện người dùng |
-| `JavaScript` | Logic hiển thị và xử lý học từ |
-| *(Tuỳ chọn mở rộng)* | React, Firebase, Text-to-Speech API, LocalStorage,... |
+- Sử dụng các ngôn ngữ đơn giản:HTML,CSS,JavaScript,Python...
 
 ---
 
 ## 🎯 Định hướng phát triển tương lai
 
 - 🌐 Tích hợp đăng nhập và đồng bộ từ vựng qua nhiều thiết bị  
-- 📱 Giao diện mobile thân thiện hơn (Progressive Web App)  
-- 🔄 Xuất/Nhập từ vựng, chia sẻ danh sách học với người khác  
+- 📱 Giao diện mobile thân thiện hơn. 
+- 🔄 Xuất/Nhập từ vựng,theo chủ đề học.
 
 ---
 
